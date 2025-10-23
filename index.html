@@ -236,10 +236,19 @@
         .hero {
             margin-top: 80px;
             background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
-            padding: 4rem 0;
+            padding: 2.5rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
+            transition: var(--transition);
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .hero.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
         }
 
         .hero::before {
@@ -2409,13 +2418,23 @@
                 }, 2000);
             }
             
-            // Header scroll effect
+            // Header scroll effect and hero hide/show
             window.addEventListener('scroll', function() {
                 const header = document.getElementById('header');
-                if (window.scrollY > 100) {
+                const hero = document.querySelector('.hero');
+                const scrollY = window.scrollY;
+                
+                if (scrollY > 100) {
                     header.classList.add('scrolled');
                 } else {
                     header.classList.remove('scrolled');
+                }
+                
+                // Hide hero section when scrolling down
+                if (hero && scrollY > 200) {
+                    hero.classList.add('hidden');
+                } else if (hero) {
+                    hero.classList.remove('hidden');
                 }
             });
         });
@@ -3352,5 +3371,5 @@
             animateElements.forEach(el => observer.observe(el));
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99300a72c27959fc',t:'MTc2MTIwOTk5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99301cf045ff1e0a',t:'MTc2MTIxMDc1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
